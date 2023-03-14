@@ -1,6 +1,6 @@
 # _University Registrar's Office_
 
-#### By Eliot Gronstal & Vera Weikel
+#### By Eliot Gronstal, Noah Atkinson, & Vera Weikel
 
 #### _An app for a University Registrar to keep track of students and courses. Made for C# Week 4 of Epicodus Coding School exploring many-to-many relationships._
 
@@ -76,4 +76,4 @@ An app for a University Registrar to keep track of students and courses.
 
 _[MIT](https://opensource.org/license/mit/)_
 
-Copyright (c) _2023_ _Eliot Gronstal, Vera Weikel_
+Copyright (c) _2023_ _Eliot Gronstal, Noah Atkinson,, Vera Weikel_
