@@ -59,7 +59,19 @@ namespace Registrar.Controllers
       return View(thisCourse);
     }
 
-
+    [HttpPost]
+    public ActionResult AddStudent(Course course, int studentId)
+    {
+      #nullable enable
+      CourseStudent? joinEntity = _db.CourseStudents.FirstOrDefault(join => (join.StudentId == studentId && join.CourseId == course.CourseId));
+      #nullable disable
+      if (joinEntity == null && studentId !=0)
+      {
+        _db.CourseStudents.Add(new CourseStudent() { StudentId = studentId, CourseId = course.CourseId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = course.CourseId});
+    }
 
 
 
