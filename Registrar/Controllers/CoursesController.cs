@@ -73,7 +73,12 @@ namespace Registrar.Controllers
       return RedirectToAction("Details", new { id = course.CourseId});
     }
 
-
+    public ActionResult Edit(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
+      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
+      return View(thisCourse);
+    }
 
 
   }
