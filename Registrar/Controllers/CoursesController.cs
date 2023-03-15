@@ -80,6 +80,12 @@ namespace Registrar.Controllers
       return View(thisCourse);
     }
 
-
+    [HttpPost]
+    public ActionResult Edit(Course course)
+    {
+      _db.Courses.Update(course);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

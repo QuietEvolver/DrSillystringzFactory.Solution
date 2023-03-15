@@ -81,8 +81,8 @@ namespace Registrar.Controllers
 
     public ActionResult Edit(int id)
     {
-      Student thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
-      ViewBag.CourseId = new SelectList(_db.Courses, "CategoryId", "CategoryName");
+      Student thisStudent = _db.Students.FirstOrDefault(student => student.StudentId == id);
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisStudent);
     }
 
