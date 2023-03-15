@@ -23,16 +23,24 @@ namespace Registrar.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
+      ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View();
     }
 
     [HttpPost]
     public ActionResult Create(Course course)
     {
-      _db.Courses.Add(course);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if(!ModelState.IsValid)
+      {
+        ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName"); //CourseStudent
+        return View();
+      }
+      else 
+      {
+        _db.Courses.Add(course);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Details(int id)
@@ -44,12 +52,12 @@ namespace Registrar.Controllers
       return View(thisCourse);
     }
 
-  //   public ActionResult Details(int id)
-  // {
-  //   Course thisCourse = _db.Courses.Include(course => course.Students)
-  //   .ThenInclude(student => student.JoinEntities)
-  //   .FirstOrDefault(course => course.CourseId == id);
-  // }
+    public ActionResult AddStudent(int id)
+    {
+      Course thisCourse = _db.Courses.FirstOrDefault(courses => courses.CourseId == id);
+      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
+      return View(thisCourse);
+    }
 
 
 

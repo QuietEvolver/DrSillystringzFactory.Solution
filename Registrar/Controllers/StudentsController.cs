@@ -61,7 +61,7 @@ namespace Registrar.Controllers
     public ActionResult AddCourse(int id)
     {
       Student thisStudent = _db.Students.FirstOrDefault(students => students.StudentId == id);
-      ViewBag.CourseId = new SelectList(_db.Students, "CourseId", "StudentName");
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
       return View(thisStudent);
     }
 
