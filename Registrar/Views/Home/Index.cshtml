@@ -2,8 +2,36 @@
   Layout = "_Layout";
 }
 
+@using Registrar.Models;
+
 <h1>Welcome to the University Registrar!</h1>
 
-<p>@Html.ActionLink("See all courses", "Index", "Courses")</p> 
+<h4>Courses</h4>
+@if (Model["courses"].Length == 0)
+{
+  <p>No Courses Added</p>
+}
 
-<!-- <p>@Html.ActionLink("See all students", "Index", "Students")</p> -->
+<ul>
+  @foreach (Course crs in Model["courses"])
+  {
+    <li>@Html.ActionLink(@crs.CourseName, "Details", "Courses", new {id = @crs.CourseId})</li>
+  }
+</ul>
+
+<h4>Students</h4>
+@if (Model["students"].Length == 0)
+{
+  <p>No Students Added</p>
+}
+
+<ul>
+  @foreach (Student student in Model["students"])
+  {
+    <li>@Html.ActionLink(@student.StudentName, "Details", "Students", new { id = @student.StudentId})</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Manage courses", "Index", "Courses")</p> 
+<p>@Html.ActionLink("Manage students", "Index", "Students")</p>
+<p>@Html.ActionLink("Manage courses", "Index", "Courses")</p>
