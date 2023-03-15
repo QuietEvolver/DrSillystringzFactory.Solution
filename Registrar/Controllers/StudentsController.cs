@@ -65,19 +65,19 @@ namespace Registrar.Controllers
       return View(thisStudent);
     }
 
-    // [HttpPost]
-    // public ActionResult AddCourse(Student student, int courseId)
-    // {
-    //   #nullable enable
-    //   CourseStudent? joinEntity = _db.CourseStudents.FirstOrDefault(join => (join.CourseId == courseId && join.StudentId == student.StudentId));
-    //   #nullable disable
-    //   if (joinEntity == null && courseId != 0)
-    //   {
-    //     _db.CourseStudents.Add(new CourseStudent() { CourseId = courseId, StudentId = student.StudentId });
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Details", new { id = student.StudentId });
-    // }
+    [HttpPost]
+    public ActionResult AddCourse(Student student, int courseId)
+    {
+      #nullable enable
+      CourseStudent? joinEntity = _db.CourseStudents.FirstOrDefault(join => (join.CourseId == courseId && join.StudentId == student.StudentId));
+      #nullable disable
+      if (joinEntity == null && courseId != 0)
+      {
+        _db.CourseStudents.Add(new CourseStudent() { CourseId = courseId, StudentId = student.StudentId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = student.StudentId });
+    }
 
     public ActionResult Edit(int id)
     {
