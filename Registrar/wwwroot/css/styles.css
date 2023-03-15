@@ -1,3 +1,8 @@
+body, .background{
+  background-image: url(“Registrar/wwwroot/img/ur.png”);
+  background-repeat: no-repeat;
+  background-position: center;
+}
 div#footer {
   position:fixed;
   bottom:0px;
