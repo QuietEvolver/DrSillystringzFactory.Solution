@@ -24,14 +24,6 @@ namespace Registrar.Controllers
       return View(model);
     }
 
-    public ActionResult Details(int id)
-    {
-      Student thisStudent = _db.Students
-                          .Include(student => student.Course)
-                          .FirstOrDefault(student => student.StudentId == id);
-      return View(thisStudent);
-    }
-
     public ActionResult Create()
     {
       ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
@@ -41,10 +33,28 @@ namespace Registrar.Controllers
     [HttpPost]
     public ActionResult Create(Student student)
     {
-      _db.Students.Add(student);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (!ModelState.IsValid)
+      {
+        ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+        return View();
+      }
+      else 
+      {
+        _db.Students.Add(student);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
+
+    public ActionResult Details(int id)
+    {
+      Student thisStudent = _db.Students
+                          .Include(student => student.JoinEntities)
+                          .ThenInclude(join => join.Course)
+                          .FirstOrDefault(student => student.StudentId == id);
+      return View(thisStudent);
+    }
+
 
     public ActionResult AddCourse(int id)
     {

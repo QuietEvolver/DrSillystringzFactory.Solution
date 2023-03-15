@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Registrar.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Registrar.Controllers
 {
@@ -36,8 +37,9 @@ namespace Registrar.Controllers
     public ActionResult Details(int id)
     {
       Course thisCourse = _db.Courses
-                              .Include(courses => courses.Students)
-                              .FirstOrDefault(courses => courses.CourseId == id);
+                              .Include(crs => crs.JoinEntities) 
+                              .ThenInclude(join => join.Student)
+                              .FirstOrDefault(courses => courses.CourseId == id);// IFF:1to1=.Include(cat => cat.Items)
       return View(thisCourse);
     }
 
