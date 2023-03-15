@@ -17,12 +17,13 @@ namespace Registrar.Controllers
 
     public ActionResult Index()
     {
-      List<Course> model = _db.Courses.ToList();
+      List<Course> model = _db.Courses.Include(course => course.Student).ToList();
       return View(model);
     }
 
     public ActionResult Create()
     {
+      ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "Name");
       return View();
     }
 

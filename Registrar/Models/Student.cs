@@ -10,10 +10,9 @@ namespace Registrar.Models
     //   [Required]
     public string StudentName { get; set; }
     public DateTime EnrollmentDate { get; set; }
-    //     [Range(1, int.MaxValue, ErrorMessage = "You must add your item to a category. Have you created a category yet?")]
+    // [Range(1, int.MaxValue, ErrorMessage = "You must add your item to a category. Have you created a category yet?")]
     public int CourseId { get; set; }
     public Course Course {get; set; }
-    //public List<ItemTag> JoinEntities { get;}
     public List<CourseStudent> JoinEntities { get;}
   }
 }

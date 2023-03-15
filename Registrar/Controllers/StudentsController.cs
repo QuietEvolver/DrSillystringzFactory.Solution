@@ -18,10 +18,12 @@ namespace Registrar.Controllers
 
     public ActionResult Index()
     {
-      List<Student> model = _db.Students
-                                .Include(student => student.Course)
-                                .ToList();
+      //<Tag> same as below: List<Course> model = _db.Students.ToList(); 
+      //return View(_db.Students.ToList());
+      // 1tomany  (*must be in Courses as well)
+      List<Student> model = _db.Students.Include(student => student.Course).ToList();
       return View(model);
+
     }
 
     public ActionResult Create()

@@ -17,10 +17,10 @@ namespace Registrar.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      Course[] crss = _db.Courses.ToArray();
+      Course[] courses = _db.Courses.ToArray();
       Student[] students = _db.Students.ToArray();
       Dictionary<string, object[]> model = new Dictionary<string, object[]>();
-      model.Add("courses", crss);
+      model.Add("courses", courses);
       model.Add("students", students);
       return View();
     }
