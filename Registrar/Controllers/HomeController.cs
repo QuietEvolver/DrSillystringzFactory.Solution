@@ -22,7 +22,7 @@ namespace Registrar.Controllers
       Dictionary<string, object[]> model = new Dictionary<string, object[]>();
       model.Add("courses", courses);
       model.Add("students", students);
-      return View();
+      return View(model);
     }
   }
 }
