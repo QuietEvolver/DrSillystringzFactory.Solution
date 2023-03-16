@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Registrar.Models;
 
@@ -10,9 +11,10 @@ using Registrar.Models;
 namespace Registrar.Migrations
 {
     [DbContext(typeof(RegistrarContext))]
-    partial class RegistrarContextModelSnapshot : ModelSnapshot
+    [Migration("20230315172054_AddStudentIdToCourseModel")]
+    partial class AddStudentIdToCourseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,11 +28,13 @@ namespace Registrar.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CourseName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("CourseNumber")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.HasKey("CourseId");
 
@@ -64,14 +68,18 @@ namespace Registrar.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("StudentName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("StudentId");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("Students");
                 });
@@ -95,9 +103,22 @@ namespace Registrar.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("Registrar.Models.Student", b =>
+                {
+                    b.HasOne("Registrar.Models.Course", "Course")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("Registrar.Models.Course", b =>
                 {
                     b.Navigation("JoinEntities");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Registrar.Models.Student", b =>

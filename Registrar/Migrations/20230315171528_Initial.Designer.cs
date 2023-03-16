@@ -11,7 +11,7 @@ using Registrar.Models;
 namespace Registrar.Migrations
 {
     [DbContext(typeof(RegistrarContext))]
-    [Migration("20230313215147_Initial")]
+    [Migration("20230315171528_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,27 @@ namespace Registrar.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("Registrar.Models.CourseStudent", b =>
+                {
+                    b.Property<int>("CourseStudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseStudentId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("CourseStudents");
+                });
+
             modelBuilder.Entity("Registrar.Models.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -60,6 +81,25 @@ namespace Registrar.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Registrar.Models.CourseStudent", b =>
+                {
+                    b.HasOne("Registrar.Models.Course", "Course")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Registrar.Models.Student", "Student")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Registrar.Models.Student", b =>
                 {
                     b.HasOne("Registrar.Models.Course", "Course")
@@ -73,7 +113,14 @@ namespace Registrar.Migrations
 
             modelBuilder.Entity("Registrar.Models.Course", b =>
                 {
+                    b.Navigation("JoinEntities");
+
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("Registrar.Models.Student", b =>
+                {
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }

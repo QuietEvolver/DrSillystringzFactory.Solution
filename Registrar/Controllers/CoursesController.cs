@@ -17,30 +17,21 @@ namespace Registrar.Controllers
 
     public ActionResult Index()
     {
-      List<Course> model = _db.Courses.ToList(); //.Include(course => course.Student).
+      List<Course> model = _db.Courses.ToList(); 
       return View(model);
     }
 
     public ActionResult Create()
     {
-      // ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View();
     }
 
     [HttpPost]
     public ActionResult Create(Course course)
     {
-      // if(!ModelState.IsValid)
-      // {
-      //   ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName"); //CourseStudent
-      //   return View();
-      // }
-      // else 
-      // {
-        _db.Courses.Add(course);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
-      // }
+      _db.Courses.Add(course);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
@@ -48,13 +39,13 @@ namespace Registrar.Controllers
       Course thisCourse = _db.Courses
                               .Include(crs => crs.JoinEntities) 
                               .ThenInclude(join => join.Student)
-                              .FirstOrDefault(courses => courses.CourseId == id);// IFF:1to1=.Include(cat => cat.Items)
+                              .FirstOrDefault(courses => courses.CourseId == id);
       return View(thisCourse);
     }
 
     public ActionResult AddStudent(int id)
     {
-      Course thisCourse = _db.Courses.FirstOrDefault(courses => courses.CourseId == id);
+      Course thisCourse = _db.Courses.FirstOrDefault(Courses => Courses.CourseId == id);
       ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View(thisCourse);
     }
@@ -76,8 +67,6 @@ namespace Registrar.Controllers
     public ActionResult Edit(int id)
     {
       Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
-      // Since I'm not displaying dropdown, VBg isn't necessary
-      // ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View(thisCourse);
     }
 
