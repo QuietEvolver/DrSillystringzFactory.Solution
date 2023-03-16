@@ -3,6 +3,7 @@
 }
 
 @using Registrar.Models;
+@model List<Registrar.Models.Course>
 
 <h1>Courses for Students</h1>
 
@@ -13,12 +14,13 @@
 <ul>
   @foreach(Course course in Model)
   {
-    <li>@Html.ActionLink($"{course.CourseName}", "Details", new { id = course.CourseId}) | @course.Student.StudentName</li>
+    <li>@Html.ActionLink($"{course.CourseName}", "Details", new { id = course.CourseId})</li> 
+    @* | @course.Student.StudentName *@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new course", "Create")</p>
-
-<p>@Html.ActionLink("Add new student", "Create", "Students")</p> @*?*@
-
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Add new course", "Create")</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

@@ -17,30 +17,30 @@ namespace Registrar.Controllers
 
     public ActionResult Index()
     {
-      List<Course> model = _db.Courses.Include(course => course.Student).ToList();
+      List<Course> model = _db.Courses.ToList(); //.Include(course => course.Student).
       return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName");
+      // ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View();
     }
 
     [HttpPost]
     public ActionResult Create(Course course)
     {
-      if(!ModelState.IsValid)
-      {
-        ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName"); //CourseStudent
-        return View();
-      }
-      else 
-      {
+      // if(!ModelState.IsValid)
+      // {
+      //   ViewBag.CourseId = new SelectList(_db.Students, "StudentId", "StudentName"); //CourseStudent
+      //   return View();
+      // }
+      // else 
+      // {
         _db.Courses.Add(course);
         _db.SaveChanges();
         return RedirectToAction("Index");
-      }
+      // }
     }
 
     public ActionResult Details(int id)
@@ -76,7 +76,8 @@ namespace Registrar.Controllers
     public ActionResult Edit(int id)
     {
       Course thisCourse = _db.Courses.FirstOrDefault(course => course.CourseId == id);
-      ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
+      // Since I'm not displaying dropdown, VBg isn't necessary
+      // ViewBag.StudentId = new SelectList(_db.Students, "StudentId", "StudentName");
       return View(thisCourse);
     }
 

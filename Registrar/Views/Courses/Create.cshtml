@@ -14,6 +14,9 @@
   @Html.LabelFor(model => model.CourseNumber)
   @Html.TextBoxFor(model => model.CourseNumber)
 
-  <input type="submit" value="Add new course" />
+  <input type="submit" value="Add new course" class="btn btn-success" />
 }
-<p>@Html.ActionLink("Show all Courses", "Index")</p>
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Show all Courses", "Index")</p>
+</div>

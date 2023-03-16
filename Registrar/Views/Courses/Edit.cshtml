@@ -15,10 +15,15 @@
   @Html.LabelFor(model => model.CourseName)
   @Html.EditorFor(model => model.CourseName)
 
+  @Html.LabelFor(model => model.CourseNumber)
+  @Html.EditorFor(model => model.CourseNumber)
+@* 
   @Html.LabelFor(model => model.Student)
-  @Html.DropDownList("StudentId")
+  @Html.DropDownList("Student") *@
 
   <input type="submit" value="Save" />
 }
-
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

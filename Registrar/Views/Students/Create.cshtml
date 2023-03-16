@@ -5,20 +5,21 @@
 @model Registrar.Models.Student
 
 <h2>Add Student </h2>
-<p><strong>NOTE:</strong> You need to have at least one course before you can add a student</p>
-<p>Go to @Html.ActionLink("this page", "Create", "Course") to create a course.</p>
+@* <p>@Html.ValidationMessageFor(model => model.CourseId, "", new (@class = "text-danger", @style="font-weight: 600;"})</p>
+<p>@Html.ValidationMessageFor(model => model.StudentName, "", new (@class = "text-danger", @style = "font-weight: 600; "})</p> *@
 
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.StudentName, "Student Name")
+  @Html.LabelFor(model => model.StudentName)
   @Html.TextBoxFor(model => model.StudentName)
 
-  @Html.LabelFor(model => model.Course)
-  @Html.DropDownList("CourseId")
+  @* @Html.LabelFor(model => model.Course)
+  @Html.DropDownList("CourseId") *@
   
-  <input type="submit" value="Add new student" />
+  <input type="submit" value="Add new student" class="btn btn-success" />
 }
-<p>@Html.ActionLink("Show all students", "Index")</p>
-
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<div id="nav-links">
+  <p>@Html.ActionLink("Show all students", "Index")</p>
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div> 

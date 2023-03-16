@@ -21,7 +21,7 @@ namespace Registrar.Controllers
       //<Tag> same as below: List<Course> model = _db.Students.ToList(); 
       //return View(_db.Students.ToList());
       // 1tomany  (*must be in Courses as well)
-      List<Student> model = _db.Students.Include(student => student.Course).ToList();
+      List<Student> model = _db.Students.ToList(); // Include(student => student.Course)
       return View(model);
 
     }
@@ -33,19 +33,28 @@ namespace Registrar.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Student student)
+    public ActionResult Create(Student student, int courseId)
     {
-      if (!ModelState.IsValid)
+      // if (!ModelState.IsValid)
+      // {
+      //   ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
+      //   return View();
+      // }
+      // else 
+      // {
+      _db.Students.Add(student);
+      _db.SaveChanges();
+      // }
+      #nullable enable
+      CourseStudent? joinEntity = _db.CourseStudents.FirstOrDefault(join => (join.CourseId == courseId && join.StudentId == student.StudentId));
+      #nullable disable
+      if (joinEntity == null && courseId != 0)
       {
-        ViewBag.CourseId = new SelectList(_db.Courses, "CourseId", "CourseName");
-        return View();
-      }
-      else 
-      {
-        _db.Students.Add(student);
+        _db.CourseStudents.Add(new CourseStudent() { CourseId = courseId, StudentId = student.StudentId });
         _db.SaveChanges();
-        return RedirectToAction("Index");
       }
+      //return RedirectToAction("Details", new { id = student.StudentId }); 
+      return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)

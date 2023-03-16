@@ -4,6 +4,7 @@
 
 @model Registrar.Models.Student
 
+
 <h2>Edit</h2>
 
 <h4>Edit this student: @Html.DisplayFor(model => model.StudentName)</h4>
@@ -15,10 +16,12 @@
   @Html.LabelFor(model => model.StudentName)
   @Html.EditorFor(model => model.StudentName)
 
-  @Html.LabelFor(model => model.Course)
-  @Html.DropDownList("CourseId")
+  @* @Html.LabelFor(model => model.Course) *@
+  @* @Html.DropDownList("Course") *@
 
   <input type="submit" value="Save" />
 }
-
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

@@ -8,7 +8,9 @@
 <h2>Student Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.StudentName): @Html.DisplayFor(model => model.StudentName)<h3>
-<h3>@Html.DisplayNameFor(model => model.Course): @Html.DisplayFor(model => model.Course.CourseName)<h3>
+<h3>@Html.DisplayNameFor(model => model.StudentName): @Html.DisplayFor(model => model.StudentName)<h3>
+  @* EnrollmentDate *@
+@* <h3>@Html.DisplayNameFor(model => model.Course): @Html.DisplayFor(model => model.Course)<h3> *@
 
   @if(Model.JoinEntities.Count == 0)
   { 
@@ -29,8 +31,10 @@
       }
     </ul>
   }
-
-<p>@Html.ActionLink("Add a course", "AddCourse", new { id = Model.StudentId} </p>
-<p>@Html.ActionLink("Edit Student or Course", "Edit", new { id = Model.StudentId })</p>
-<p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId })</p>
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Add a course", "AddCourse", new { id = Model.StudentId}) </p>
+  <p>@Html.ActionLink("Edit Student or Course", "Edit", new { id = Model.StudentId })</p>
+  <p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId })</p>
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>
