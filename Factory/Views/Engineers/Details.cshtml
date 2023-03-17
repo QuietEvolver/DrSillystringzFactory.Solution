@@ -1,0 +1,40 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models
+@model Factory.Models.Engineer
+
+<h2>Engineer Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)<h3>
+<h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)<h3>
+  @* EnrollmentDate *@
+@* <h3>@Html.DisplayNameFor(model => model.Machine): @Html.DisplayFor(model => model.Machine)<h3> *@
+
+  @if(Model.JoinEntities.Count == 0)
+  { 
+    <p>Engineer has no machines yet.</p>
+  }
+  else
+  {
+    <h4> This student has the following machines:</h4>
+    <ul>
+      @foreach(EngineerMachine join in Model.JoinEntities)
+      {
+        <li>Machines: @join.Machine.MachineName</li>
+        @using (Html.BeginForm("DeleteJoin", "Engineers"))
+        {
+          @Html.Hidden("joinId", @join.EngineerMachineId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+    </ul>
+  }
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Add a machine", "AddMachine", new { id = Model.EngineerId}) </p>
+  <p>@Html.ActionLink("Edit Engineer or Machine", "Edit", new { id = Model.EngineerId })</p>
+  <p>@Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })</p>
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+</div>

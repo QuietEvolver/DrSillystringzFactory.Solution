@@ -1,0 +1,40 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+
+<h1>Welcome to Dr. Sillystringz's Factory!</h1>
+
+<h4>Machiness</h4>
+@if (Model["machines"].Length == 0)
+{
+  <p>No Machiness Added</p>
+}
+
+<ul>
+  @foreach (Machines crs in Model["machines"])
+  {
+    <li>@Html.ActionLink(@crs.MachinesName, "Details", "Machiness", new {id = @crs.MachinesId})</li>
+  }
+</ul>
+
+<h4>Engineers</h4>
+@if (Model["engineers"].Length == 0)
+{
+  <p>No Engineers Added</p>
+}
+
+<ul>
+  @foreach (Engineer engineer in Model["engineers"])
+  {
+    <li>@Html.ActionLink(@engineer.EngineerName, "Details", "Engineers", new { id = @engineer.EngineerId})</li>
+  }
+</ul>
+
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Manage machines", "Index", "Machiness")</p> 
+  <p>@Html.ActionLink("Manage engineers", "Index", "Engineers")</p>
+  @* <p>@Html.ActionLink("Manage tags", "Index", "Tags")</p> *@
+</div>

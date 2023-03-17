@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models
+@model Factory.Models.Machine
+
+<h2>Machine Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.MachineName): @Html.DisplayFor(model => model.MachineName)</h3>
+<h3>@Html.DisplayNameFor(model => model.MachineNumber): @Html.DisplayFor(model => model.MachineNumber)</h3>  
+@* <h3>@Html.DisplayNameFor(model => model.Engineer): @Html.DisplayFor(model => model.Engineer)</h3>   *@
+
+@if (@Model.JoinEntities.Count == 0)
+{
+  <h3>This course has no student(s)</h3>
+} 
+else
+{
+  <h3>Machine populated with follwoing student(s):</h3>
+  <ul>
+    @foreach (EngineerMachine join in Model.JoinEntities)
+      {
+        <li>Engineer: @join.Engineer.EngineerName</li>
+        @using (Html.BeginForm("DeleteJoin", "Engineers"))
+        {
+          @Html.Hidden("joinId",@join.EngineerMachineId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+  </ul>
+}
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Back to list", "Index")</p>
+
+  <p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId})</p>
+
+  <p>@Html.ActionLink("Add a Engineer", "AddEngineer", new { id = Model.MachineId })</p>
+
+  <p>@Html.ActionLink("Delete a Machine", "Delete", new { id = Model.MachineId })</p>
+</div>
