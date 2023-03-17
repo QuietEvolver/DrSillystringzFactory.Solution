@@ -6,16 +6,16 @@
 
 <h1>Welcome to Dr. Sillystringz's Factory!</h1>
 
-<h4>Machiness</h4>
+<h4>Machines</h4>
 @if (Model["machines"].Length == 0)
 {
-  <p>No Machiness Added</p>
+  <p>No Machines Added</p>
 }
 
 <ul>
-  @foreach (Machines crs in Model["machines"])
+  @foreach (Machine crs in Model["machines"])
   {
-    <li>@Html.ActionLink(@crs.MachinesName, "Details", "Machiness", new {id = @crs.MachinesId})</li>
+    <li>@Html.ActionLink(@crs.MachineName, "Details", "Machines", new {id = @crs.MachineId})</li>
   }
 </ul>
 
@@ -34,7 +34,7 @@
 
 <br>
 <div id="nav-links">
-  <p>@Html.ActionLink("Manage machines", "Index", "Machiness")</p> 
+  <p>@Html.ActionLink("Manage machines", "Index", "Machines")</p> 
   <p>@Html.ActionLink("Manage engineers", "Index", "Engineers")</p>
   @* <p>@Html.ActionLink("Manage tags", "Index", "Tags")</p> *@
 </div>

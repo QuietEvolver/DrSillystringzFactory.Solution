@@ -10,7 +10,7 @@ namespace Factory.Models
     [Required(ErrorMessage = "The item's description cannot be empty.")]
     // [Required]
     public string EngineerName { get; set; }
-    public DateTime EnrollmentDate { get; set; }
+    public DateTime HireDate { get; set; }
     public List<EngineerMachine> JoinEntities { get;}
   }
 }
