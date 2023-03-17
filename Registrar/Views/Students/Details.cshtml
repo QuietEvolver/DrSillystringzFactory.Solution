@@ -22,7 +22,7 @@
     <ul>
       @foreach(CourseStudent join in Model.JoinEntities)
       {
-        <li>Students: @join.Student.StudentName</li>
+        <li>Courses: @join.Course.CourseName</li>
         @using (Html.BeginForm("DeleteJoin", "Students"))
         {
           @Html.Hidden("joinId", @join.CourseStudentId)
