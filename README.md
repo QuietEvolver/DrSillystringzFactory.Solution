@@ -62,7 +62,7 @@ This is an MVC web application to manage their engineers, and the machines they 
 
 ![alt](HairSalon/wwwroot/img/vw_database_structure.png "vw_database_structure") -->
 
-## Known Bugss
+## Known Bugs
 
 * None
 
